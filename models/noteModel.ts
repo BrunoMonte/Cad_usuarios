@@ -5,11 +5,18 @@ import mongoose  from 'mongoose'
 const noteSchema = new mongoose.Schema({
     //tipando os campos - tipos dados do mongoose
   
-    nome: String,
-    senha: Number,
-    numero: Number,
-    email: String
-    
+    numero: {
+        type: Number,
+        required: true  // para informar , colocado por obrigação 
+    },
+    nome: {
+        type: String,Number,
+        required: true
+    },
+    email: String,
+    idade: Number,
+    empresa: String, Number,
+    dn: Number
 
 })
 

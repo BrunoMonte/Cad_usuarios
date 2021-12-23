@@ -5,7 +5,7 @@ import { Note } from '../models/noteModel'
 
 //Regra de negócio, par facilitar na destribuição em camadas
 
-const list = async () => {
+const listagem_cadastro = async () => {
     await connect()
     const result = await Note.find()   //fazendo listagem de tudo dentro da tabela
     return result
@@ -24,23 +24,28 @@ const get = async (nome: string | number) => {
     return note
 }
 
-const create = async (note: INote ) => {
+const criar_usuario = async (note: INote ) => {
     if (!note.nome) {
-        throw new Error("Informe o campo nome!")
+        throw new Error("Informe seu nome completo!")
     }
-    if (!note.senha) {
-        throw new Error("Informe o campo senha!")
-    }
-  
     if (!note.numero) {
-        throw new Error("Informe o campo de número!")
+        throw new Error("Informe o telefone para contato !")
     }
     if (!note.email) {
         throw new Error("Informe o campo de email!")
     }
+    if (!note.idade) {
+        throw new Error("Informe o campo de sua idade!")
+    }
+    if (!note.empresa) {
+        throw new Error("Indique o campo de empresa !")
+    }
+    if (!note.dn) {
+        throw new Error("Informe a sua data de nascimento!")
+    }
 
     
-    await Note.create(note)
+   // await Note.criar_usuario(note)
     
     return true
   
@@ -51,10 +56,6 @@ const update = async (note: INote) => {
     if (!note.nome) {
         throw new Error("Informe o campo nome!")
     }
-    if (!note.senha) {
-        throw new Error("Informe o campo senha!")
-    }
-  
     if (!note.numero) {
         throw new Error("Informe o campo numero!")
     }
@@ -63,7 +64,7 @@ const update = async (note: INote) => {
     }
     
   
-    const noteFound = await Note.findByIdAndUpdate(note.senha, note) // metodos utilizado no mongoose
+    const noteFound = await Note.findByIdAndUpdate(note.nome, note) // metodos utilizado no mongoose
   
     if (!noteFound) {
       throw new Error("Nenhuma anotação encontrada para o Nome e Senha informado!")
@@ -86,9 +87,9 @@ const remove = async (senha: number) => {
 }
 
 export {
-    list,
+    listagem_cadastro,
     get,
-    create,
+    criar_usuario,
     update,
     remove
 }
