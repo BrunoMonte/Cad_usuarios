@@ -1,4 +1,6 @@
 # Cad_usuarios
+## Utilizado p/  construção da api
+$ Node.Js | TypeScript | MongoDb | Mongoose |  Nodemon |Express.js
 ## Instalando dependencias e executando a api
 
 $ Na sua máquina abrir cmd, executar seguinte comando: git clone https://github.com/BrunoMonte/Cad_usuarios.git
