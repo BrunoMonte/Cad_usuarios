@@ -2,7 +2,7 @@ interface INote {
     nome: string | number,   
     numero: number,
     email: string | number,
-    idade: number,
+    senha: number,
     empresa:string | number,
     dn: number
 }

@@ -34,8 +34,8 @@ const criar_usuario = async (note: INote ) => {
     if (!note.email) {
         throw new Error("Informe o campo de email!")
     }
-    if (!note.idade) {
-        throw new Error("Informe o campo de sua idade!")
+    if (!note.senha) {
+        throw new Error("Informe uma senha !")
     }
     if (!note.empresa) {
         throw new Error("Indique o campo de empresa !")
