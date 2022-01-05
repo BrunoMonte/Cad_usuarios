@@ -1,6 +1,7 @@
 import { INote } from "../types/INote"
 import { connect } from '../libs/mongodb'
 import { Note } from '../models/noteModel'
+import { Error } from "mongoose"
 
 
 //Regra de negócio, par facilitar na destribuição em camadas
@@ -45,7 +46,7 @@ const criar_usuario = async (note: INote ) => {
     }
 
     
-   // await Note.criar_usuario(note)
+    //await Note.criar_usuario(note)
     
     return true
   
@@ -53,18 +54,15 @@ const criar_usuario = async (note: INote ) => {
 
 const update = async (note: INote) => {
     
-    if (!note.nome) {
-        throw new Error("Informe o campo nome!")
-    }
-    if (!note.numero) {
-        throw new Error("Informe o campo numero!")
-    }
     if (!note.email) {
         throw new Error("Informe o campo email!")
     }
+    if(!note.senha){
+        throw new Error("Informe o campo de senha")
+    }
     
   
-    const noteFound = await Note.findByIdAndUpdate(note.nome, note) // metodos utilizado no mongoose
+    const noteFound = await Note.findByIdAndUpdate(note.senha, note) // metodos utilizado no mongoose
   
     if (!noteFound) {
       throw new Error("Nenhuma anotação encontrada para o Nome e Senha informado!")

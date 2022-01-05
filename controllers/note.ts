@@ -46,16 +46,23 @@ const criar_usuario = async (req: Request<any>, res: Response<any>) => {
 
 const update = async (req: Request<any>, res: Response<any>) => {
     try {
-        const nome = req.body.nome
-        const numero = req.body.numero
+        const email = req.body.email
+        const senha = req.body.senha
         
         
-        if (nome) {
-            return res.status(400).json({ message: 'Informe o campo Nome para alterar contato' })
+        if (!email && !senha) {
+            return res.status(401).json({ message: 'Informe o campo Email e Senha para alterar registro;' })
         }
 
-        //const noteUpdated = await note.update({ nome , numero})
-      //  return res.json(noteUpdated)
+        const noteUpdated = await note.update({
+    senha,
+    nome: '',
+    numero: 0,
+    email: '',
+    empresa: '',
+    dn: 0               //estuda motivo da alteração das propriedades !
+})
+        return res.json(noteUpdated)
     } catch (err: any) {
         return error(res, err)
     }
