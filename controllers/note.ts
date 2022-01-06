@@ -55,7 +55,7 @@ const update = async (req: Request<any>, res: Response<any>) => {
         }
 
         const noteUpdated = await note.update({
-    senha,
+    senha: 0,
     nome: '',
     numero: 0,
     email: '',
@@ -71,13 +71,14 @@ const update = async (req: Request<any>, res: Response<any>) => {
 
 const remove = async (req: Request<any>, res: Response<any>) => {
     try {
-        const numero = req.body.numero
+        const email = req.body.email
+        const senha = req.body.senha
         
-        if (!numero) {
-            return res.status(400).json({ message: 'Informe o campo NUMERO, para excluir o contato' })
+        if (!email && !senha) {
+            return res.status(404).json({ message: 'Informe os campos correto, para excluir o contato' })
         }
 
-        await note.remove(numero)
+        await note.remove(email, senha)
         res.json({ success: true })
 
     } catch (err: any) {

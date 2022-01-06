@@ -71,9 +71,9 @@ const update = async (note: INote) => {
     return true
 }
 
-const remove = async (senha: number) => {
-    if (!senha) {
-        throw new Error("Nome ou senha inválidos")
+const remove = async (email:string, senha: number) => {
+    if (!email && !senha) {
+        throw new Error("Dados inválidos")
     }
   
     const note = await Note.findByIdAndRemove(senha)
