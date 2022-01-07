@@ -8,10 +8,11 @@
     "build": "tsc --project ./"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/BrunoMonte/Cad_usuarios"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bruno Aguiar",
   "license": "ISC",
   "bugs": {
     

@@ -46,7 +46,7 @@ const criar_usuario = async (note: INote ) => {
     }
 
     
-    //await Note.criar_usuario(note)
+    await Note.create(note)
     
     return true
   

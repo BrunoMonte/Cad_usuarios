@@ -13,7 +13,6 @@ const port = 3000
 
 
 app.get('/notes',  note.listagem_cadastro)
-app.get('/login/', note.get)
 app.post('/notes', note.criar_usuario)
 app.put('/notes', note.update)
 app.delete('/notes', note.remove)
