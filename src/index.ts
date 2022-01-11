@@ -1,8 +1,7 @@
-import * as dotenv from 'dotenv'
-
 import express from 'express'
 import cors from 'cors'
 import * as note from './controllers/note'
+import * as dotenv from 'dotenv'
 
 dotenv.config()  //para variáveis de ambiente 
 
