@@ -4,21 +4,27 @@ import mongoose  from 'mongoose'
 
 const noteSchema = new mongoose.Schema({
     //tipando os campos - tipos dados do mongoose
-  
+    name:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true,
+        lowercase:true
+    },
+    password:{
+        type:String,
+        required:true,
+        select:false // quando solicitar no banco, nao vim no array de usuarios.
+    },
+    RegisteredDate:{    // anota a data que o registro foi criado
+        type: Date,
+        default: Date.now
+    }
    
-    nome: {
-        type: String,Number,
-        required: true
-    },
-    numero: {
-        type: Number,
-        required: true  // para informar , colocado por obrigação 
-    },
-    email: String,
-    senha: Number,
-    empresa: String, Number,
-    dn: Number
-
+ 
 })
 
 const Note = mongoose.model('notes', noteSchema) //Nome da tabela de referencia no banco

@@ -1,10 +1,7 @@
 interface INote {
-    nome: string | number,   
-    numero: number,
-    email: string | number,
-    senha: number,
-    empresa:string | number,
-    dn: number
+    name:string,
+    email:string,
+    password:string
 }
 
 export {

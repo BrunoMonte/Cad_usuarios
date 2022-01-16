@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import * as note from '../services/note'
 import { error } from '../libs/bindError'
+import { Note } from '../models/noteModel'
 
 
 const listagem_cadastro = async (req: Request<any>, res: Response<any>) => {
@@ -28,57 +29,43 @@ const get = async (req: Request<any>, res: Response<any>) => {
 
 const criar_usuario = async (req: Request<any>, res: Response<any>) => {
     try {
-        const nome = req.body.nome
-        const numero = req.body.numero
-        const email = req.body.email
-        const senha = req.body.senha
-        const empresa = req.body.empresa
-        const dn = req.body.dn  //data nascimento
+        const user = await Note.create(req.body)
         
-        const noteCreated = await note.criar_usuario({ nome, numero, email, senha, empresa, dn })
-        return res.json(noteCreated)
+        return res.send({ user })
     } catch (err: any) {
-        return error(res, err)
+        return res.status(401).send({ error: "Falha ao registrar" })
     }
-
-  
+ 
 }
 
-const update = async (req: Request<any>, res: Response<any>) => {
+const alteracao_cadastro = async (req: Request<any>, res: Response<any>) => {
     try {
         const email = req.body.email
-        const senha = req.body.senha
-        
-        
-        if (!email && !senha) {
-            return res.status(401).json({ message: 'Informe o campo Email e Senha para alterar registro;' })
+        const password = req.body.password
+
+        if(!email && !password){
+            return res.status(401).json({ message: "Informe os dados corretos !"})
         }
 
-        const noteUpdated = await note.update({
-    senha: 0,
-    nome: '',
-    numero: 0,
-    email: '',
-    empresa: '',
-    dn: 0               //estuda motivo da alteração das propriedades !
-})
-        return res.json(noteUpdated)
-    } catch (err: any) {
-        return error(res, err)
-    }
+        const noteUpdate = await note.alteracao_cadastro
 
+        return res.json(note.alteracao_cadastro)
+
+    } catch (err: any) {
+        return err(res,error)
+    }
 }
 
 const remove = async (req: Request<any>, res: Response<any>) => {
     try {
         const email = req.body.email
-        const senha = req.body.senha
+        const password = req.body.password
         
-        if (!email && !senha) {
+        if (!email && !password) {
             return res.status(404).json({ message: 'Informe os campos correto, para excluir o contato' })
         }
 
-        await note.remove(email, senha)
+        await note.remove(email, password)
         res.json({ success: true })
 
     } catch (err: any) {
@@ -90,6 +77,6 @@ export {
     listagem_cadastro,
     get, 
     criar_usuario,
-    update, 
+    alteracao_cadastro,
     remove
 }

@@ -12,8 +12,8 @@ const port = 3000
 
 
 app.get('/notes',  note.listagem_cadastro)
-app.post('/notes', note.criar_usuario)
-app.put('/notes', note.update)
+app.post('/notes/cadastrar', note.criar_usuario)
+app.put('/notes', note.alteracao_cadastro)
 app.delete('/notes', note.remove)
 
 

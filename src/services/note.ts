@@ -4,6 +4,7 @@ import { Note } from '../models/noteModel'
 import { Error } from "mongoose"
 
 
+
 //Regra de negócio, par facilitar na destribuição em camadas
 
 const listagem_cadastro = async () => {
@@ -26,24 +27,7 @@ const get = async (nome: string | number) => {
 }
 
 const criar_usuario = async (note: INote ) => {
-    if (!note.nome) {
-        throw new Error("Informe seu nome completo!")
-    }
-    if (!note.numero) {
-        throw new Error("Informe o telefone para contato !")
-    }
-    if (!note.email) {
-        throw new Error("Informe o campo de email!")
-    }
-    if (!note.senha) {
-        throw new Error("Informe uma senha !")
-    }
-    if (!note.empresa) {
-        throw new Error("Indique o campo de empresa !")
-    }
-    if (!note.dn) {
-        throw new Error("Informe a sua data de nascimento!")
-    }
+   const user = await Note.create()
 
     
     await Note.create(note)
@@ -52,17 +36,17 @@ const criar_usuario = async (note: INote ) => {
   
 }
 
-const update = async (note: INote) => {
+const alteracao_cadastro = async (note: INote) => {
     
     if (!note.email) {
         throw new Error("Informe o campo email!")
     }
-    if(!note.senha){
+    if(!note.password){
         throw new Error("Informe o campo de senha")
     }
     
   
-    const noteFound = await Note.findByIdAndUpdate(note.senha, note) // metodos utilizado no mongoose
+    const noteFound = await Note.findByIdAndUpdate(note.password, note) // metodos utilizado no mongoose
   
     if (!noteFound) {
       throw new Error("Nenhuma anotação encontrada para o Nome e Senha informado!")
@@ -71,12 +55,12 @@ const update = async (note: INote) => {
     return true
 }
 
-const remove = async (email:string, senha: number) => {
-    if (!email && !senha) {
+const remove = async (email:string, password: string) => {
+    if (!email && !password) {
         throw new Error("Dados inválidos")
     }
   
-    const note = await Note.findByIdAndRemove(senha)
+    const note = await Note.findByIdAndRemove(password)
     if (!note) {
         throw new Error("Nenhuma cadastro encontrad para os campos informados!")
     }
@@ -88,6 +72,6 @@ export {
     listagem_cadastro,
     get,
     criar_usuario,
-    update,
+    alteracao_cadastro,
     remove
 }
